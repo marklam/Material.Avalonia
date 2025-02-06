@@ -1,6 +1,7 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:pages="clr-namespace:Material.Avalonia.Demo.Pages"
+             xmlns:models="clr-namespace:Material.Avalonia.Demo.Models"
              x:Class="Material.Avalonia.Demo.Pages.Home"
              x:DataType="pages:Home">
     <!--UserControl.Resources>
@@ -42,16 +43,15 @@
                 <Button Content="ABOUT AVALONIAUI" Classes="primary" Command="{Binding Path=ShowAboutAvaloniaUI}" />
             </WrapPanel>
         </StackPanel>
-        <!-- Features listing is disabled. -->
-        <!--
             <StackPanel Margin="0,24">
               <DataGrid Height="620"
                         IsReadOnly="True"
-                        Items="{Binding Path=DataContext.Features}" 
+                        ItemsSource="{Binding Path=Features}"
                         VerticalAlignment="Stretch"
                         VerticalScrollBarVisibility="Disabled">
                 <DataGrid.Columns>
                   <DataGridTextColumn Header="Features"
+                                      x:DataType="models:FeatureStatusModels"
                                       Binding="{Binding FeatureName}"
                                       Width="20*" />
                   <DataGridTemplateColumn>
@@ -61,8 +61,8 @@
                                  HorizontalAlignment="Stretch"/>
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
-                      <DataTemplate>
-                        <TextBlock TextAlignment="Right" Text="{Binding Converter={StaticResource GetDescription}, Path=IsReady}"/>
+                      <DataTemplate x:DataType="models:FeatureStatusModels">
+                        <TextBlock TextAlignment="Right" Text="{Binding Path=IsReady}"/>
                       </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                   </DataGridTemplateColumn> 
@@ -73,14 +73,13 @@
                                  HorizontalAlignment="Stretch"/>
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
-                      <DataTemplate>
-                        <TextBlock TextAlignment="Right" Text="{Binding Converter={StaticResource GetDescription}, Path=IsAnimated}"/>
+                      <DataTemplate  x:DataType="models:FeatureStatusModels">
+                        <TextBlock TextAlignment="Right" Text="{Binding Path=IsAnimated}"/>
                       </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                   </DataGridTemplateColumn>
                 </DataGrid.Columns>
               </DataGrid>
             </StackPanel>
-            -->
     </StackPanel>
 </UserControl>
